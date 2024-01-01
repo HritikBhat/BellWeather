@@ -155,7 +155,7 @@ class AppKeywordFragment : Fragment(),KeywordAdapter.OnKeywordItemClickListener 
                     mainViewModel.deleteAppKeyword(keywordArrayList[position])
                     keywordArrayList.removeAt(position)
                     checkKeywordSize()
-                    keyAdapter.updateDeletedItemList(position, keywordArrayList)
+                    keyAdapter.updateDeletedItemList(position)
                     Toast.makeText(requireContext(), "Keyword Removed!", Toast.LENGTH_LONG).show()
                     Log.d("Position::: ","$position")
                     Log.d("Array::: ", keywordArrayList.toString())
