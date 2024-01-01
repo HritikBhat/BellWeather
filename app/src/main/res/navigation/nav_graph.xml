@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.hritikbhat.bellweather.ui.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_addAppFragment2"
+            app:destination="@id/addAppFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewAppFragment"
+            app:destination="@id/viewAppFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAppFragment2"
+        android:name="com.hritikbhat.bellweather.ui.fragments.AddAppFragment"
+        android:label="Add App"
+        tools:layout="@layout/fragment_add_app"/>
+    <fragment
+        android:id="@+id/viewAppFragment"
+        android:name="com.hritikbhat.bellweather.ui.fragments.ViewAppFragment"
+        android:label="App Settings"
+        tools:layout="@layout/fragment_view_app">
+        <argument
+            android:name="appData"
+            app:argType="com.hritikbhat.bellweather.data.db.tables.AppTable" />
+        <action
+            android:id="@+id/action_viewAppFragment_to_appKeywordFragment"
+            app:destination="@id/appKeywordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appKeywordFragment"
+        android:name="com.hritikbhat.bellweather.ui.fragments.AppKeywordFragment"
+        android:label="Filter Section"
+        tools:layout="@layout/fragment_app_keyword">
+        <argument
+            android:name="aid"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+</navigation>
