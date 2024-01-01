@@ -3,6 +3,7 @@ package com.hritikbhat.bellweather.util.services
 import android.app.Notification
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import android.util.Log
 import com.hritikbhat.bellweather.data.enums.TriggerSource
 import com.hritikbhat.bellweather.data.db.tables.AppTable
 import com.hritikbhat.bellweather.ui.activities.MainActivity
@@ -30,6 +31,7 @@ class NotificationService : NotificationListenerService() {
 
         // Check if the notification is from a specific package
         if (MainActivity.isServiceEnabled){
+
             val notificationContent = sbn.notification.extras.getCharSequence(Notification.EXTRA_TEXT).toString()
 
             MainActivity.appAlertService?.coroutineScopeMain?.launch(Dispatchers.Main) {

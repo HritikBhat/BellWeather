@@ -27,38 +27,6 @@ private fun isGivenTriggerSource(notifications: TriggerSource, appSettingTable: 
     return flag
 }
 
-fun checkIfAppFiltersTriggered2(context: Context, searchString: String, notifications: TriggerSource): AppTable?{
-    var appTable: AppTable?=null
-    var functionFlag = false
-
-    GlobalScope.launch(Dispatchers.Main) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val keywordArraylist = AppDatabase(context).getAppDao().getAllAppKeywordsBySearchString(searchString)
-            Log.d("Trigger KeywordArr",keywordArraylist.toString())
-
-            if (keywordArraylist.isNotEmpty()){
-
-                functionFlag= keywordArraylist.any {
-                    if (searchString.contains(it.kName)){
-                        val appSettingTable = AppDatabase(context).getAppDao().getAppSettingByAID(it.aId)
-                        if(isGivenTriggerSource(notifications,appSettingTable)){
-                            appTable = AppDatabase(context).getAppDao().getApp(it.aId)
-                            true
-                        }
-                        else{
-                            false
-                        }
-                    }
-                    else{false}
-                }
-            }
-        }.join()
-    }
-
-
-    return if(functionFlag) appTable else null
-}
-
 suspend fun checkIfAppFiltersTriggered(context: Context, searchString: String, notifications: TriggerSource): AppTable? {
     return suspendCoroutine { continuation ->
         MainActivity.appAlertService?.coroutineScopeIO?.launch(Dispatchers.IO) {
